@@ -1,9 +1,19 @@
 .section {
   float: left;
-  width: 1000px;
+  width: 100vw;
   height: 100vh;
-  background-color: red;
+  background-color: #ffffff;
+  &__title {
+    font-size: 6.0rem;
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    transform: translate(-50%, -50%);
+    color: #000000;
+  }
 }
 .section:nth-child(even) {
-  background-color: blue;
+  background-color: #dddddd;
 }
