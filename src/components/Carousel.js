@@ -26,10 +26,17 @@ class Carousel extends Component {
     function handleWheel(event) {
       let newScrollTop = $window.scrollTop() + event.originalEvent.deltaX;
       $window.scrollTop(newScrollTop);
-      console.log("newScrollTop:", newScrollTop);
+      // console.log("newScrollTop:", newScrollTop);
       TweenMax.to($slider, 0.5, { x: -$window.scrollTop(), ease: "easeOutExpo" });
     }
-    $window.on("wheel", handleWheel);
+    function preventHistory(e) {
+      // console.log("preventHistory");
+      e.preventDefault();
+    }
+
+    // $window.on("wheel", preventHistory);
+    document.addEventListener("mousewheel", preventHistory);
+    $slider.on("wheel", handleWheel);
 
     function updateWindow() {
       console.log("updateWindow");
@@ -44,7 +51,7 @@ class Carousel extends Component {
 
       let holderHeight = sliderWidth - windowWidth + windowHeight;
       $holder.css("height", holderHeight + "px");
-      console.log("holderHeight:", holderHeight);
+      // console.log("holderHeight:", holderHeight);
     }
     $window.on("resize", updateWindow);
     updateWindow();
