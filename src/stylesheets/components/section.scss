@@ -1,0 +1,9 @@
+.section {
+  float: left;
+  width: 1000px;
+  height: 100vh;
+  background-color: red;
+}
+.section:nth-child(even) {
+  background-color: blue;
+}
