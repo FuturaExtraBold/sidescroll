@@ -2,6 +2,15 @@ import React, { Component } from "react";
 import $ from "jquery";
 import TweenMax from "gsap";
 
+import Automations from "./Automations";
+import Community from "./Community";
+import EmailMarketing from "./EmailMarketing";
+import LandingPages from "./LandingPages";
+import MarketingFunnels from "./MarketingFunnels";
+import MembershipSites from "./MembershipSites";
+import OnlineCourses from "./OnlineCourses";
+import Websites from "./Websites";
+
 class App extends Component {
 
   componentDidMount() {
@@ -43,10 +52,14 @@ class App extends Component {
       <div className="holder">
         <div className="fixer">
           <div className="slider">
-            <section className="section"></section>
-            <section className="section"></section>
-            <section className="section"></section>
-            <section className="section"></section>
+            <OnlineCourses />
+            <EmailMarketing />
+            <Websites />
+            <LandingPages />
+            <Community />
+            <Automations />
+            <MarketingFunnels />
+            <MembershipSites />
             <section className="section">
               <h1 className="section__title">Kajabi does it all.</h1>
             </section>
