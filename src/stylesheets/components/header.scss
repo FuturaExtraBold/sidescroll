@@ -1,0 +1,16 @@
+.header {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  border-bottom: 1px solid #dddddd;
+  background-color: #ffffff;
+  &__container {
+    @include container;
+    display: flex;
+    align-items: center;
+    height: 80px;
+  }
+  &__title {
+    margin: 0;
+  }
+}
