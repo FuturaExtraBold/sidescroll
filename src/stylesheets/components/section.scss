@@ -16,3 +16,10 @@
 .section:nth-child(even) {
   background-color: #dddddd;
 }
+@media (max-width: $sm-max) {
+  .section {
+    position: relative;
+    display: block;
+    float: none;
+  }
+}

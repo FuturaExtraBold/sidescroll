@@ -2,3 +2,9 @@
   @include fit;
   position: fixed;
 }
+@media (max-width: $sm-max) {
+  .fixer {
+    position: relative;
+    display: block;
+  }
+}
