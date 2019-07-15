@@ -16,6 +16,7 @@ import Websites from "./Websites";
 class Carousel extends Component {
 
   componentDidMount() {
+    let $document = $(document);
     let $window = $(window);
     let windowWidth, windowHeight;
 
@@ -23,26 +24,10 @@ class Carousel extends Component {
     let $slider = $(".slider");
     let $sections = $(".section");
 
-    function handleWheel(event) {
-      console.log("deltaX:", event.originalEvent.deltaX);
-      let newScrollTop = $window.scrollTop() + event.originalEvent.deltaX;
-      $window.scrollTop(newScrollTop);
-      // console.log("newScrollTop:", newScrollTop);
-      TweenMax.to($slider, 0.5, { x: -$window.scrollTop(), ease: "easeOutExpo" });
-    }
-    function preventHistory(e) {
-      // console.log("preventHistory");
-      // e.preventDefault();
-    }
-
     function handleScroll(event) {
-      console.log("handleScroll:", $window.scrollTop());
       TweenMax.to($slider, 0.5, { x: -$window.scrollTop(), ease: "easeOutExpo" });
     }
     $window.on("scroll", handleScroll);
-
-    $window.on("wheel", preventHistory);
-    $slider.on("wheel", handleWheel);
 
     function updateWindow() {
       console.log("updateWindow");
@@ -57,7 +42,6 @@ class Carousel extends Component {
 
       let holderHeight = sliderWidth - windowWidth + windowHeight;
       $holder.css("height", holderHeight + "px");
-      // console.log("holderHeight:", holderHeight);
     }
     $window.on("resize", updateWindow);
     updateWindow();
