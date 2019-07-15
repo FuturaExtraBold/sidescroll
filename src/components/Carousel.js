@@ -24,6 +24,7 @@ class Carousel extends Component {
     let $sections = $(".section");
 
     function handleWheel(event) {
+      console.log("deltaX:", event.originalEvent.deltaX);
       let newScrollTop = $window.scrollTop() + event.originalEvent.deltaX;
       $window.scrollTop(newScrollTop);
       // console.log("newScrollTop:", newScrollTop);
@@ -31,11 +32,16 @@ class Carousel extends Component {
     }
     function preventHistory(e) {
       // console.log("preventHistory");
-      e.preventDefault();
+      // e.preventDefault();
     }
 
-    // $window.on("wheel", preventHistory);
-    document.addEventListener("mousewheel", preventHistory);
+    function handleScroll(event) {
+      console.log("handleScroll:", $window.scrollTop());
+      TweenMax.to($slider, 0.5, { x: -$window.scrollTop(), ease: "easeOutExpo" });
+    }
+    $window.on("scroll", handleScroll);
+
+    $window.on("wheel", preventHistory);
     $slider.on("wheel", handleWheel);
 
     function updateWindow() {
