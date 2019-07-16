@@ -1,3 +1,5 @@
 .slider {
   @include fit;
+  top: $header-height;
+  height: calc(100% - $header-height);
 }

@@ -23,8 +23,25 @@ class Carousel extends Component {
     let $slider = $(".slider");
     let $sections = $(".section");
 
-    function handleScroll(event) {
-      TweenMax.to($slider, 0.5, { x: -$window.scrollTop(), ease: "easeOutExpo" });
+    let initialScrollComplete = false;
+
+    function scrollToSection() {
+      let str = window.location.pathname.split("/")[1];
+      if (str !== "") {
+        console.log("scrollToSection:", str);
+        $window.scrollTop($("." + str).position().left);
+      }
+    }
+
+    function handleScroll() {
+      console.log("handleScroll", $window.scrollTop());
+      TweenMax.to($slider, 0.5, { x: -$window.scrollTop(), ease: "easeOutExpo", onComplete: () => {
+        if (!initialScrollComplete) {
+          console.log("initialScrollComplete!");
+          initialScrollComplete = true;
+          scrollToSection();
+        }
+      }});
     }
 
     function updateWindow() {
@@ -41,6 +58,7 @@ class Carousel extends Component {
         let holderHeight = sliderWidth - windowWidth + windowHeight;
         $holder.css("height", holderHeight + "px");
         $window.on("scroll", handleScroll);
+        scrollToSection();
       } else {
         console.log("window is under!");
         $window.off("scroll");
@@ -49,6 +67,9 @@ class Carousel extends Component {
       }
     }
     $window.on("resize", updateWindow);
+    $window.on("beforeunload", function() {
+      $window.scrollTop(0);
+    });
     updateWindow();
   }
 

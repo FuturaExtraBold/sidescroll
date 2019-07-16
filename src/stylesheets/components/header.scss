@@ -8,7 +8,7 @@
     @include container;
     display: flex;
     align-items: center;
-    height: 80px;
+    height: $header-height;
   }
   &__title {
     margin: 0;
