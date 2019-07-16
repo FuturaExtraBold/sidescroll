@@ -16,8 +16,11 @@ import Websites from "./Websites";
 class Carousel extends Component {
 
   componentDidMount() {
+    console.log("componentDidMount");
+
     let $window = $(window);
     let windowWidth, windowHeight;
+    resetWindow();
 
     let $holder = $(".holder");
     let $slider = $(".slider");
@@ -66,10 +69,15 @@ class Carousel extends Component {
         $holder.removeAttr("style");
       }
     }
-    $window.on("resize", updateWindow);
-    $window.on("beforeunload", function() {
+
+    function resetWindow() {
+      console.log("resetWindow")
       $window.scrollTop(0);
-    });
+    }
+
+    $window.on("resize", updateWindow);
+    $window.on("beforeunload", resetWindow);
+
     updateWindow();
   }
 
