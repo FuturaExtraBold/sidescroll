@@ -12,6 +12,7 @@ import LandingPages from "./LandingPages";
 import MarketingFunnels from "./MarketingFunnels";
 import MembershipSites from "./MembershipSites";
 import OnlineCourses from "./OnlineCourses";
+import SplashVideo from "./SplashVideo";
 import Websites from "./Websites";
 
 class Carousel extends Component {
@@ -25,6 +26,7 @@ class Carousel extends Component {
     let $holder = $(".slider");
     let $slider = $(".slider__content");
     let $sections = $(".section");
+    let $overlay = $(".slider__overlay");
 
     function initialScroll() {
       console.log("initialScroll");
@@ -74,6 +76,8 @@ class Carousel extends Component {
     $window.on("scroll", handleScroll);
     $window.on("touchstart", handleTouch);
 
+    TweenMax.to($overlay, 1, { opacity: 0, delay: 1 });
+
     resetWindow();
     updateWindow();
     initialScroll();
@@ -83,6 +87,8 @@ class Carousel extends Component {
     return (
       <div className="slider">
         <div className="slider__fixed">
+          <SplashVideo />
+          <div className="slider__overlay"></div>
           <div className="slider__content">
             <Hero />
             <OnlineCourses />

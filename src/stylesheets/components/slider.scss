@@ -10,6 +10,10 @@
     top: $header-height;
     height: calc(100% - #{ $header-height });
   }
+  &__overlay {
+    @include fit;
+    background-color: #000000;
+  }
 }
 @media (max-width: $sm-max) {
   .slider {
