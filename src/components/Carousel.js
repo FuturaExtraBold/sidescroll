@@ -6,6 +6,7 @@ import ScrollToPlugin from "gsap/ScrollToPlugin";
 import Automations from "./Automations";
 import Community from "./Community";
 import EmailMarketing from "./EmailMarketing";
+import Hero from "./Hero";
 import ItAll from "./ItAll";
 import LandingPages from "./LandingPages";
 import MarketingFunnels from "./MarketingFunnels";
@@ -78,6 +79,7 @@ class Carousel extends Component {
       <div className="holder">
         <div className="fixer">
           <div className="slider">
+            <Hero />
             <OnlineCourses />
             <EmailMarketing />
             <Websites />
