@@ -2,15 +2,15 @@
   position: fixed;
   z-index: 100;
   width: 100%;
-  border-bottom: 1px solid #dddddd;
-  background-color: #ffffff;
+  border-bottom: 1px solid #222222;
+  background-color: #000000;
   &__container {
     @include container;
     display: flex;
     align-items: center;
     height: $header-height;
   }
-  &__title {
-    margin: 0;
+  &__logo {
+    width: 26px;
   }
 }

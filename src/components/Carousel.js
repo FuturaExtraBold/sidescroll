@@ -65,9 +65,14 @@ class Carousel extends Component {
       $window.scrollTop(0);
     }
 
+    function handleTouch() {
+      console.log("handleTouch");
+    }
+
     $window.on("beforeunload", resetWindow);
     $window.on("resize", updateWindow);
     $window.on("scroll", handleScroll);
+    $window.on("touchstart", handleTouch);
 
     resetWindow();
     updateWindow();

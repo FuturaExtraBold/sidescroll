@@ -19,6 +19,9 @@ footer {
 img {
   @include responsive-image;
 }
+svg {
+  @include responsive-image;
+}
 .container {
   @include container;
 }

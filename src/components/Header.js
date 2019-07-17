@@ -1,10 +1,14 @@
 import React from "react";
 
+import { ReactComponent as KajabiLogo } from "../assets/images/ui/kajabi_logo_k.svg";
+
 const Header = () => {
   return (
     <header className="header">
       <div className="header__container">
-        <h3 className="header__title">Header</h3>
+        <div className="header__logo">
+          <KajabiLogo />
+        </div>
       </div>
     </header>
   );
