@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-// import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import $ from "jquery";
 import TweenMax from "gsap";
+import ScrollToPlugin from "gsap/ScrollToPlugin";
 
 import Automations from "./Automations";
 import Community from "./Community";
@@ -20,31 +20,22 @@ class Carousel extends Component {
 
     let $window = $(window);
     let windowWidth, windowHeight;
-    resetWindow();
 
     let $holder = $(".holder");
     let $slider = $(".slider");
     let $sections = $(".section");
 
-    let initialScrollComplete = false;
-
-    function scrollToSection() {
+    function initialScroll() {
+      console.log("initialScroll");
       let str = window.location.pathname.split("/")[1];
       if (str !== "") {
-        console.log("scrollToSection:", str);
-        $window.scrollTop($("." + str).position().left);
+        TweenMax.to($window, 1, { scrollTo: $("." + str).position().left, ease: "easeInOutExpo", delay: 1 });
       }
     }
 
     function handleScroll() {
       console.log("handleScroll", $window.scrollTop());
-      TweenMax.to($slider, 0.5, { x: -$window.scrollTop(), ease: "easeOutExpo", onComplete: () => {
-        if (!initialScrollComplete) {
-          console.log("initialScrollComplete!");
-          initialScrollComplete = true;
-          scrollToSection();
-        }
-      }});
+      TweenMax.to($slider, 0.5, { x: -$window.scrollTop(), ease: "easeOutExpo" });
     }
 
     function updateWindow() {
@@ -60,8 +51,6 @@ class Carousel extends Component {
         $slider.css("width", sliderWidth + "px");
         let holderHeight = sliderWidth - windowWidth + windowHeight;
         $holder.css("height", holderHeight + "px");
-        $window.on("scroll", handleScroll);
-        scrollToSection();
       } else {
         console.log("window is under!");
         $window.off("scroll");
@@ -71,14 +60,17 @@ class Carousel extends Component {
     }
 
     function resetWindow() {
-      console.log("resetWindow")
+      console.log("resetWindow");
       $window.scrollTop(0);
     }
 
-    $window.on("resize", updateWindow);
     $window.on("beforeunload", resetWindow);
+    $window.on("resize", updateWindow);
+    $window.on("scroll", handleScroll);
 
+    resetWindow();
     updateWindow();
+    initialScroll();
   }
 
   render() {
