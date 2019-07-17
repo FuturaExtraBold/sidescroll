@@ -22,8 +22,8 @@ class Carousel extends Component {
     let $window = $(window);
     let windowWidth, windowHeight;
 
-    let $holder = $(".holder");
-    let $slider = $(".slider");
+    let $holder = $(".slider");
+    let $slider = $(".slider__content");
     let $sections = $(".section");
 
     function initialScroll() {
@@ -81,9 +81,9 @@ class Carousel extends Component {
 
   render() {
     return (
-      <div className="holder">
-        <div className="fixer">
-          <div className="slider">
+      <div className="slider">
+        <div className="slider__fixed">
+          <div className="slider__content">
             <Hero />
             <OnlineCourses />
             <EmailMarketing />

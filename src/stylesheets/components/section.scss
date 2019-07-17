@@ -12,9 +12,6 @@
     color: #ffffff;
   }
 }
-.section:nth-child(even) {
-  background-color: #020202;
-}
 @media (max-width: $sm-max) {
   .section {
     position: relative;

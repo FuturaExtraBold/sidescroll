@@ -1,5 +1,21 @@
 .slider {
-  @include fit;
-  top: $header-height;
-  height: calc(100% - #{ $header-height });
+  position: absolute;
+  width: 100vw;
+  &__fixed {
+    @include fit;
+    position: fixed;
+  }
+  &__content {
+    @include fit;
+    top: $header-height;
+    height: calc(100% - #{ $header-height });
+  }
+}
+@media (max-width: $sm-max) {
+  .slider {
+    &__fixed {
+      position: relative;
+      display: block;
+    }
+  }
 }
