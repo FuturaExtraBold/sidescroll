@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import $ from "jquery";
 import TweenMax from "gsap";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
+import Draggable from "gsap/Draggable";
+import ThrowPropsPlugin from "../assets/javascripts/gsap/ThrowPropsPlugin";
 
 import Automations from "./Automations";
 import Community from "./Community";
@@ -67,14 +69,48 @@ class Carousel extends Component {
       $window.scrollTop(0);
     }
 
-    function handleTouch() {
-      console.log("handleTouch");
+    function handleMouseMove() {
+      console.log("mousemove");
+    }
+
+    let initialX;
+    let currentX;
+    let xOffset = 0;
+    let ticker = 0;
+    let deltaX = 0;
+    function handleTouchStart(event) {
+      $(".indicator--start").css("background-color", "red");
+      $window.off("scroll");
+      $window.off("touchstart");
+      $window.on("touchmove", handleTouchMove);
+      $window.on("touchend", handleTouchEnd);
+      // initialX = event.touches[0].clientX - xOffset;
+      initialX = windowWidth / 2;
+      console.log("handleTouchStart :: initialX:", initialX, "currentX:", currentX, "xOffset:", xOffset);
+    }
+
+    function handleTouchMove(event) {
+      $(".indicator--move").css("background-color", "red");
+      event.preventDefault();
+      currentX = event.touches[0].clientX - initialX;
+      console.log("handleTouchMove :: initialX:", initialX, "currentX:", currentX, "xOffset:", xOffset);
+      TweenMax.to($slider, 0.5, { x: currentX, ease: "easeOutExpo" });
+      // console.log("touch:", touch.pageX, touch.pageY);
+    }
+
+    function handleTouchEnd() {
+      $window.off("touchend");
+      $window.on("touchstart", handleTouchStart);
+      $(".indicator--end").css("background-color", "red");
+      $(".indicator").css("background-color", "rebeccapurple");
+      initialX = currentX;
+      console.log("handleTouchEnd :: initialX:", initialX, "currentX:", currentX, "xOffset:", xOffset);
     }
 
     $window.on("beforeunload", resetWindow);
     $window.on("resize", updateWindow);
     $window.on("scroll", handleScroll);
-    $window.on("touchstart", handleTouch);
+    $window.on("touchstart", handleTouchStart);
 
     TweenMax.to($overlay, 1, { opacity: 0, delay: 1 });
 
@@ -87,6 +123,9 @@ class Carousel extends Component {
     return (
       <div className="slider">
         <div className="slider__fixed">
+          <div className="indicator indicator--start">Start</div>
+          <div className="indicator indicator--move">Move</div>
+          <div className="indicator indicator--end">End</div>
           <SplashVideo />
           <div className="slider__overlay"></div>
           <div className="slider__content">
