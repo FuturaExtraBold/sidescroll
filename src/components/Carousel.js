@@ -118,10 +118,11 @@ class Carousel extends Component {
       $window.off("touchmove");
       $window.on("touchstart", handleTouchStart);
       $(".indicator--end").css("background-color", "red");
-      $(".indicator").css("background-color", "rebeccapurple");
-      // deltaX = switchX - currentX;
+      setTimeout(() => {
+        $(".indicator").css("background-color", "rebeccapurple");
+      }, 100);
+      deltaX = switchX - currentX;
       sliderX -= currentX;
-      // TweenMax.to($slider, 0.2, { x: sliderX });
       console.log("handleTouchEnd :::: deltaX:", deltaX, "ticker:", ticker, "sliderX:", sliderX);
     }
 
@@ -136,7 +137,7 @@ class Carousel extends Component {
       $window.on("scroll", handleScroll);
     }
 
-    TweenMax.to($overlay, 1, { opacity: 0, delay: 1 });
+    TweenMax.to($overlay, 1, { opacity: 0.6, delay: 1 });
 
     resetWindow();
     updateWindow();
@@ -152,6 +153,14 @@ class Carousel extends Component {
           <div className="indicator indicator--end">End</div>
           <SplashVideo />
           <div className="slider__overlay"></div>
+          <div className="center">
+            <div className="center__line center__line--one-quarter center__line--horizontal"></div>
+            <div className="center__line center__line--one-quarter center__line--vertical"></div>
+            <div className="center__line center__line--half center__line--horizontal"></div>
+            <div className="center__line center__line--half center__line--vertical"></div>
+            <div className="center__line center__line--three-quarter center__line--horizontal"></div>
+            <div className="center__line center__line--three-quarter center__line--vertical"></div>
+          </div>
           <div className="slider__content">
             <Hero />
             <OnlineCourses />

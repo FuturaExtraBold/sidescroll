@@ -4,11 +4,11 @@
   &__fixed {
     @include fit;
     position: fixed;
+    top: $header-height;
+    height: calc(100% - #{ $header-height });
   }
   &__content {
     @include fit;
-    top: $header-height;
-    height: calc(100% - #{ $header-height });
   }
   &__overlay {
     @include fit;
