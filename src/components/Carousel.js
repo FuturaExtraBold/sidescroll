@@ -29,6 +29,9 @@ class Carousel extends Component {
     let $sections = $(".section");
     let $overlay = $(".slider__overlay");
 
+    let sliderWidth = 0;
+    let holderHeight = 0;
+
     function initialScroll() {
       console.log("initialScroll");
       let str = window.location.pathname.split("/")[1];
@@ -49,12 +52,12 @@ class Carousel extends Component {
       windowHeight = $window.outerHeight();
       if (windowWidth > 768) {
         console.log("window is over!");
-        let sliderWidth = 0;
+        sliderWidth = 0;
         $sections.each((index) => {
           sliderWidth += $sections.eq(index).outerWidth();
         });
         $slider.css("width", sliderWidth + "px");
-        let holderHeight = sliderWidth - windowWidth + windowHeight;
+        holderHeight = sliderWidth - windowWidth + windowHeight;
         $holder.css("height", holderHeight + "px");
       } else {
         console.log("window is under!");
@@ -122,8 +125,11 @@ class Carousel extends Component {
       setTimeout(() => {
         $(".indicator").css("background-color", "rebeccapurple");
       }, 100);
-      deltaX = switchX - currentX;
-      sliderX -= currentX;
+      deltaX = switchX - currentX * 4;
+      sliderX -= currentX - deltaX;
+      sliderX = Math.max(sliderX, 0);
+      sliderX = Math.min(sliderX, holderHeight - windowHeight);
+      TweenMax.to($slider, 1, { x: -sliderX, ease: "easeOutExpo" });
       console.log("handleTouchEnd :::: deltaX:", deltaX, "ticker:", ticker, "sliderX:", sliderX);
     }
 
