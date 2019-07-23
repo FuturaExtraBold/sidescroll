@@ -4,6 +4,7 @@ import TweenMax from "gsap";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
 
 import Automations from "./Automations";
+import CenterGuide from "./CenterGuide";
 import Community from "./Community";
 import EmailMarketing from "./EmailMarketing";
 import Hero from "./Hero";
@@ -153,14 +154,7 @@ class Carousel extends Component {
           <div className="indicator indicator--end">End</div>
           <SplashVideo />
           <div className="slider__overlay"></div>
-          <div className="center">
-            <div className="center__line center__line--one-quarter center__line--horizontal"></div>
-            <div className="center__line center__line--one-quarter center__line--vertical"></div>
-            <div className="center__line center__line--half center__line--horizontal"></div>
-            <div className="center__line center__line--half center__line--vertical"></div>
-            <div className="center__line center__line--three-quarter center__line--horizontal"></div>
-            <div className="center__line center__line--three-quarter center__line--vertical"></div>
-          </div>
+          <CenterGuide />
           <div className="slider__content">
             <Hero />
             <OnlineCourses />
