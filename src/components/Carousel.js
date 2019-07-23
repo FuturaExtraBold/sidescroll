@@ -73,43 +73,44 @@ class Carousel extends Component {
     }
 
     let initialX = 0;
+    let switchX = 0;
     let previousX = 0;
     let currentX = 0;
-    let xOffset = 0;
+    let offsetX = 0;
     let ticker = 0;
     let deltaX = 0;
     let previousScrollDirection = 0;
     let currentScrollDirection = 0;
-    let scrollingForward = true;
+    let sliderX = 0;
     function handleTouchStart(event) {
       $(".indicator--start").css("background-color", "red");
       $window.off("scroll");
       $window.off("touchstart");
       $window.on("touchmove", handleTouchMove);
       $window.on("touchend", handleTouchEnd);
+      offsetX = windowWidth / 2;
       initialX = Math.round(event.touches[0].clientX);
       ticker = 0;
-      console.log("handleTouchStart :: initialX:", initialX, "currentX:", currentX, "xOffset:", xOffset);
+      console.log("handleTouchStart :: initialX:", initialX, "currentX:", currentX);
     }
 
     function handleTouchMove(event) {
       $(".indicator--move").css("background-color", "red");
       event.preventDefault();
       ticker ++;
-      previousX = Math.round(event.touches[0].clientX);
-      if (previousX >= currentX) {
-        currentScrollDirection = 1;
-      } else {
-        currentScrollDirection = 0;
-      }
+      previousX = Math.round(event.touches[0].clientX - offsetX);
+
+      if (previousX > currentX) currentScrollDirection = 1;
+      else if (previousX < currentX) currentScrollDirection = 0;
       if (previousScrollDirection != currentScrollDirection) {
-        console.log("scroll direction changed!");
         ticker = 0;
+        switchX = currentX;
       }
       previousScrollDirection = currentScrollDirection;
-      currentX = Math.round(event.touches[0].clientX);
-      TweenMax.set($slider, { x: currentX });
-      console.log("handleTouchMove ::: initialX:", initialX, "currentX:", currentX, "xOffset:", xOffset, "scrollingForward:", scrollingForward);
+
+      currentX = Math.round(event.touches[0].clientX - initialX);
+      TweenMax.set($slider, { x: currentX - sliderX });
+      console.log("handleTouchMove ::: initialX:", initialX, "previousX:", previousX, "currentX:", currentX, "sliderX:", sliderX);
     }
 
     function handleTouchEnd() {
@@ -118,14 +119,14 @@ class Carousel extends Component {
       $window.on("touchstart", handleTouchStart);
       $(".indicator--end").css("background-color", "red");
       $(".indicator").css("background-color", "rebeccapurple");
-      // initialX = currentX;
-      console.log("handleTouchEnd :::: initialX:", initialX, "currentX:", currentX, "xOffset:", xOffset, "ticker:", ticker);
+      // deltaX = switchX - currentX;
+      sliderX -= currentX;
+      // TweenMax.to($slider, 0.2, { x: sliderX });
+      console.log("handleTouchEnd :::: deltaX:", deltaX, "ticker:", ticker, "sliderX:", sliderX);
     }
 
     $window.on("beforeunload", resetWindow);
     $window.on("resize", updateWindow);
-
-    // function check
 
     if ($("html").hasClass("touchevents")) {
       console.log("has touchevents");
