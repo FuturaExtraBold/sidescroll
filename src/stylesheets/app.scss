@@ -7,8 +7,11 @@
 
 @import "components/center";
 @import "components/cover_video";
+@import "components/fauxpad";
 @import "components/header";
 @import "components/indicator";
 @import "components/section";
 @import "components/slider";
-@import "components/splash_video.scss";
+@import "components/splash_video";
+
+@import "modules/email_marketing";
