@@ -1,7 +1,6 @@
 import React from "react";
 
 const EmailMarketing = () => {
-  const imgUrl = require(`../assets/images/ipad.png`);
   return (
     <section className="section email-marketing">
       <div className="fauxpad">
@@ -12,7 +11,6 @@ const EmailMarketing = () => {
           <div className="fauxpad__content"></div>
         </div>
       </div>
-      {/* <img className="email-marketing__image" src={ imgUrl } /> */}
     </section>
   );
 }
