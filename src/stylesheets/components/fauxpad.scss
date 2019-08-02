@@ -16,6 +16,28 @@ $fauxpad-height: $fauxpad-content-height + $fauxpad-frame-width * 2 + $fauxpad-o
     border-radius: 34px;
     box-shadow: 20px 20px 100px 0 rgba(0,0,0,0.6);
   }
+  &__button {
+    position: absolute;
+    border-radius: 3px;
+    background-color: #bbbbbb;
+  }
+  &__power {
+    top: 50px;
+    left: -4px;
+    width: 10px;
+    height: 50px;
+  }
+  &__volume {
+    top: -4px;
+    width: 40px;
+    height: 10px;
+  }
+  &__volume--1 {
+    left: 50px;
+  }
+  &__volume--2 {
+    left: 100px;
+  }
   &__outer-frame {
     @include fit;
     border-radius: 34px;
